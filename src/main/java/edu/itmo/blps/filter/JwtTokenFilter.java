@@ -1,6 +1,5 @@
 package edu.itmo.blps.filter;
 
-import edu.itmo.blps.dao.customer.CustomerRepository;
 import edu.itmo.blps.dao.user.User;
 import edu.itmo.blps.dao.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -8,18 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import utils.JwtUtils;
+import edu.itmo.blps.utils.JwtUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 
 @Component

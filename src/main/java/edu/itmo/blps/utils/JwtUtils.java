@@ -1,4 +1,4 @@
-package utils;
+package edu.itmo.blps.utils;
 
 import edu.itmo.blps.DemoApplication;
 import edu.itmo.blps.dao.user.User;

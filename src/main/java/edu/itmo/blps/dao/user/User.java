@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import edu.itmo.blps.dao.company.Company;
 import edu.itmo.blps.dao.customer.Customer;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(of = {"id", "username"})
 @NoArgsConstructor
 @Table(name = "_user")
 @Entity

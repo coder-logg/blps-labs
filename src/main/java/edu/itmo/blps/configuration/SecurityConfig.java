@@ -2,7 +2,7 @@ package edu.itmo.blps.configuration;
 
 
 import edu.itmo.blps.filter.JwtTokenFilter;
-import edu.itmo.blps.service.UserDetailsServiceImpl;
+import edu.itmo.blps.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.FilterInvocation;
@@ -32,13 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Autowired
-	private UserDetailsServiceImpl userService;
+	private UserService userService;
 
 	@Autowired
 	private JwtTokenFilter tokenFilter;
-
-//	@Autowired
-//	private JwtAuthenticationFilter filter;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -52,11 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated()
 				.expressionHandler(webExpressionHandler());
 		http.addFilterAfter(tokenFilter, UsernamePasswordAuthenticationFilter.class);
-//		http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
-//		http.exceptionHandling()
-//				.authenticationEntryPoint((request, response, ex) -> {
-//					response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
-//				});
 	}
 
 	@Override
@@ -81,18 +72,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return defaultWebSecurityExpressionHandler;
 	}
 
-
-
-//	@Bean
-//	public JwtAuthenticationFilter tokenProcessingFilter() throws Exception {
-//		JwtAuthenticationFilter tokenProcessingFilter = new JwtAuthenticationFilter(userService, authenticationManger);
-//		tokenProcessingFilter.setAuthenticationSuccessHandler((request, response, authentication) -> {
-//			SecurityContextHolder.getContext().setAuthentication(authentication);
-//			request.getRequestDispatcher(request.getServletPath()).forward(request, response);
-//		});
-//		tokenProcessingFilter.setAuthenticationFailureHandler((request, response, authenticationException) -> {
-//			response.getOutputStream().print(authenticationException.getMessage());
-//		});
-//		return tokenProcessingFilter;
-//	}
 }

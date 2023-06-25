@@ -6,14 +6,17 @@ import edu.itmo.blps.dao.user.UserRepository;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import utils.JwtUtils;
+import edu.itmo.blps.utils.JwtUtils;
+import edu.itmo.blps.utils.XmlUserRepository;
 
 import javax.persistence.EntityExistsException;
-import javax.security.auth.message.AuthException;
+import javax.xml.bind.JAXBException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -22,7 +25,7 @@ import java.util.stream.Stream;
 @Slf4j
 public class AuthService {
 	@Autowired
-	private UserDetailsServiceImpl userService;
+	private UserService userService;
 
 	@Autowired
 	private BasketService basketService;
@@ -31,29 +34,28 @@ public class AuthService {
 	private UserRepository userRepository;
 
 	@Autowired
+	private XmlUserRepository xmlUserRepository;
+
+	@Autowired
 	private PasswordEncoder encoder;
 
-	public String login(User user) throws AuthException {
+	public String login(User user) throws AuthenticationException {
 		final User userFromDb = (User) userService.loadUserByUsername(user.getUsername());
-		if (encoder.matches(user.getPassword(), userFromDb.getPassword())) {
+		if (encoder.matches(user.getPassword(), userFromDb.getPassword()))
 			return JwtUtils.generateToken(userFromDb);
-		} else {
-			throw new AuthException("Incorrect password");
-		}
+		else
+			throw new BadCredentialsException("Invalid password");
 	}
 
-
 	@Transactional(value = "bitronixTransactionManager")
-	public User registerUser(User newUser) {
+	public User register(User newUser) {
 		log.debug("new user trying to register {}", newUser);
 		boolean isValidStrings = Stream.of(newUser.getUsername(), newUser.getPassword())
 				.noneMatch((x) -> Objects.isNull(x) | x.isEmpty());
 		if (!isValidStrings)
-			throw new IllegalArgumentException("You enter illegal username or password");
+			throw new IllegalArgumentException("You entered illegal username or password");
 		newUser.setPassword(new BCryptPasswordEncoder().encode(newUser.getPassword()));
-		if (userRepository.existsByUsername(newUser.getUsername()))
-			throw new EntityExistsException("User with username '" + newUser.getUsername() + "' already exists");
-		User userFromDb = userRepository.save(newUser);
+		User userFromDb = userService.saveIfNotExists(newUser);
 		if (!Objects.isNull(userFromDb) && userFromDb instanceof Customer)
 			basketService.createBasketForCustomerId(userFromDb.getId());
 		return userFromDb;
