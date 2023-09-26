@@ -47,5 +47,6 @@ create table if not exists transaction(
 	seller_id int not null references company(id),
 	device_id int not null references device(id),
 	amount int not null,
+	discount int check ( discount <= 100 and discount >= 0 ) default 0,
 	date_time timestamp default current_timestamp
 );

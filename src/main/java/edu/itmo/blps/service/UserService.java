@@ -1,9 +1,9 @@
 package edu.itmo.blps.service;
 
-import edu.itmo.blps.dao.user.User;
-import edu.itmo.blps.dao.user.UserRepository;
-import edu.itmo.blps.dto.XmlUser;
-import edu.itmo.blps.utils.XmlUserRepository;
+import edu.itmo.blps.model.user.User;
+import edu.itmo.blps.model.user.UserRepository;
+import edu.itmo.blps.utils.xml.storage.XmlUser;
+import edu.itmo.blps.utils.xml.storage.XmlUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
 import javax.xml.bind.JAXBException;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -56,6 +56,11 @@ public class UserService implements UserDetailsService {
 			e.printStackTrace();
 			return userFromDb;
 		}
+	}
+
+	@Transactional(transactionManager = "bitronixTransactionManager")
+	public Set<String> getUserEmails() {
+		return userRepository.getUserEmails();
 	}
 
 	@Transactional(transactionManager = "bitronixTransactionManager")

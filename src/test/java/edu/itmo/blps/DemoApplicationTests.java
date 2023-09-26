@@ -1,22 +1,13 @@
 package edu.itmo.blps;
 
-import edu.itmo.blps.configuration.TransactionConfig;
-import edu.itmo.blps.dao.company.Company;
-import edu.itmo.blps.dao.company.CompanyRepository;
-import edu.itmo.blps.dao.user.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import edu.itmo.blps.model.company.Company;
+import edu.itmo.blps.model.company.CompanyRepository;
+import edu.itmo.blps.model.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 //@RunWith(SpringRunner.class)

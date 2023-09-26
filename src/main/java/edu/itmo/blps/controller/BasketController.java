@@ -1,7 +1,7 @@
 package edu.itmo.blps.controller;
 
-import edu.itmo.blps.dao.basket.Basket;
-import edu.itmo.blps.dao.device.Device;
+import edu.itmo.blps.model.basket.Basket;
+import edu.itmo.blps.model.device.Device;
 import edu.itmo.blps.service.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

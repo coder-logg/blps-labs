@@ -1,17 +1,11 @@
 package edu.itmo.blps.utils;
 
 import edu.itmo.blps.DemoApplication;
-import edu.itmo.blps.dao.user.User;
+import edu.itmo.blps.model.user.User;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import lombok.NonNull;
-import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-import javax.crypto.SecretKey;
-import java.security.Key;
 import java.util.Date;
 
 @Slf4j

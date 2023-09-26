@@ -1,17 +1,15 @@
 package edu.itmo.blps.controller;
 
-import edu.itmo.blps.dao.company.Company;
-import edu.itmo.blps.dao.device.Device;
-import edu.itmo.blps.dao.user.User;
+import edu.itmo.blps.model.company.Company;
+import edu.itmo.blps.model.device.Device;
+import edu.itmo.blps.model.user.User;
 import edu.itmo.blps.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @RequestMapping("/device")
@@ -38,7 +36,7 @@ public class DeviceController {
 	}
 
 	@PostMapping
-	@PreAuthorize("hasRole('COMPANY')")
+//	@PreAuthorize("hasRole('COMPANY')")
 	public ResponseEntity<Device> addDevice(@RequestBody Device device, Authentication authentication) {
 		device.setCompany(new Company(((User) authentication.getPrincipal()).getId()));
 		return ResponseEntity.ok(deviceService.saveDevice(device));

@@ -1,8 +1,8 @@
 package edu.itmo.blps.service;
 
-import edu.itmo.blps.dao.basket.Basket;
-import edu.itmo.blps.dao.basket.BasketRepository;
-import edu.itmo.blps.dao.device.Device;
+import edu.itmo.blps.model.basket.Basket;
+import edu.itmo.blps.model.basket.BasketRepository;
+import edu.itmo.blps.model.device.Device;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

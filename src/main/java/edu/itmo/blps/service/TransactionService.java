@@ -1,6 +1,6 @@
 package edu.itmo.blps.service;
 
-import edu.itmo.blps.dao.transaction.Transaction;
+import edu.itmo.blps.model.transaction.Transaction;
 
 import java.util.List;
 

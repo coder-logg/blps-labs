@@ -1,13 +1,11 @@
 package edu.itmo.blps.service;
 
-import edu.itmo.blps.dao.company.Company;
-import edu.itmo.blps.dao.device.Device;
-import edu.itmo.blps.dao.device.DeviceRepository;
+import edu.itmo.blps.model.company.Company;
+import edu.itmo.blps.model.device.Device;
+import edu.itmo.blps.model.device.DeviceRepository;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

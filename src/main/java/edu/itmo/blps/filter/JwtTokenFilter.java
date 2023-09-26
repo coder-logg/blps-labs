@@ -1,7 +1,7 @@
 package edu.itmo.blps.filter;
 
-import edu.itmo.blps.dao.user.User;
-import edu.itmo.blps.dao.user.UserRepository;
+import edu.itmo.blps.model.user.User;
+import edu.itmo.blps.model.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

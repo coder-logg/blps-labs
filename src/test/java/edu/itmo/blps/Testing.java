@@ -1,6 +1,6 @@
 package edu.itmo.blps;
 
-import edu.itmo.blps.dao.user.Role;
+import edu.itmo.blps.model.user.Role;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 

@@ -11,7 +11,7 @@ import org.springframework.transaction.jta.JtaTransactionManager;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "edu.itmo.blps.dao", transactionManagerRef = "bitronixTransactionManager")
+@EnableJpaRepositories(basePackages = "edu.itmo.blps.model", transactionManagerRef = "bitronixTransactionManager")
 public class TransactionConfig {
 
 	@Bean(name = "bitronixTransactionManager")

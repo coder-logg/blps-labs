@@ -1,7 +1,7 @@
 package edu.itmo.blps.controller;
 
 
-import edu.itmo.blps.dao.user.User;
+import edu.itmo.blps.model.user.User;
 import edu.itmo.blps.service.AuthService;
 import edu.itmo.blps.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

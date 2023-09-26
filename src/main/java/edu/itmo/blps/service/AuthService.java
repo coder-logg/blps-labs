@@ -1,8 +1,8 @@
 package edu.itmo.blps.service;
 
-import edu.itmo.blps.dao.customer.Customer;
-import edu.itmo.blps.dao.user.User;
-import edu.itmo.blps.dao.user.UserRepository;
+import edu.itmo.blps.model.customer.Customer;
+import edu.itmo.blps.model.user.User;
+import edu.itmo.blps.model.user.UserRepository;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import edu.itmo.blps.utils.JwtUtils;
-import edu.itmo.blps.utils.XmlUserRepository;
+import edu.itmo.blps.utils.xml.storage.XmlUserRepository;
 
-import javax.persistence.EntityExistsException;
-import javax.xml.bind.JAXBException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -49,7 +47,7 @@ public class AuthService {
 
 	@Transactional(value = "bitronixTransactionManager")
 	public User register(User newUser) {
-		log.debug("new user trying to register {}", newUser);
+		log.info("new user trying to register {}", newUser);
 		boolean isValidStrings = Stream.of(newUser.getUsername(), newUser.getPassword())
 				.noneMatch((x) -> Objects.isNull(x) | x.isEmpty());
 		if (!isValidStrings)
